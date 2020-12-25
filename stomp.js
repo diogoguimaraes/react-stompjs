@@ -30,13 +30,13 @@ const StompEventTypes = {
 }
 
 
-const newStompClient = (url, login, passcode, host) => {
-    logger.log('Stomp trying to connect', url, login, passcode, host)
+const newStompClient = (url, headers) => {
+    logger.log('Stomp trying to connect', headers)
 
     // let socket = SockJS(url)
     _stompClient = new Client({
         brokerURL: url,
-        connectHeaders: {login, passcode, host},
+        connectHeaders: headers,
         debug: (str) => {
             logger.log(str)
         },
