@@ -17,7 +17,11 @@ if (typeof TextEncoder !== 'function') {
 // Stomp client
 let _stompClient = null
 
-const logger = console // Use any logger you want here
+const logger = {
+    log: (str) => {
+        //swollow log
+    }
+}
 const stompEvent = new EventEmitter()
 
 // WebSocketError is more reliable on detecting the connection lost
