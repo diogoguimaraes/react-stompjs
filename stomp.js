@@ -1,11 +1,9 @@
 import React from 'react'
 
 import EventEmitter from 'eventemitter3'
-import PropTypes from 'prop-types'
 
 import SockJS from 'sockjs-client'
 import {Client} from '@stomp/stompjs'
-
 
 if (typeof TextEncoder !== 'function') {
     const TextEncodingPolyfill = require('text-encoding')
@@ -13,14 +11,11 @@ if (typeof TextEncoder !== 'function') {
     TextDecoder = TextEncodingPolyfill.TextDecoder
 }
 
-
 // Stomp client
 let _stompClient = null
 
 const logger = {
-    log: (str) => {
-        //swollow log
-    }
+    log: (str) => {}
 }
 const stompEvent = new EventEmitter()
 
@@ -32,7 +27,6 @@ const StompEventTypes = {
     WebSocketClose: 3,
     WebSocketError: 4,
 }
-
 
 const newStompClient = (url, headers) => {
     logger.log('Stomp trying to connect', headers)
@@ -110,27 +104,8 @@ const stompContext = {
 }
 
 const withStomp = (Component) => (
-    (props) => {
-        const wrapped = <Component stompContext={stompContext} {...props} />
-
-        wrapped.propTypes = {
-            stompContext: PropTypes.shape({
-                getStompClient: PropTypes.func,
-                newStompClient: PropTypes.func,
-                removeStompClient: PropTypes.func,
-                addStompEventListener: PropTypes.func,
-                removeStompEventListener: PropTypes.func,
-            })
-        }
-
-        return wrapped
-    }
+    (props) => <Component stompContext={stompContext} {...props} />
 )
-
-withStomp.propTypes = {
-    Component: PropTypes.element,
-}
-
 
 // Exports
 export {StompEventTypes, withStomp}
