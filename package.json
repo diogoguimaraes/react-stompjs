@@ -2,7 +2,7 @@
   "name": "react-stompjs",
   "version": "0.5.3",
   "description": "React websocket High Order Component with @stomp/stompjs (V5) over SockJS",
-  "main": "./stomp.js",
+  "main": "dist/stomp.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/loming/react-stompjs.git"
@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/loming/react-stompjs/issues"
   },
+  "scripts": {
+    "build": "babel stomp.js -d dist"
+  },
   "homepage": "https://github.com/loming/react-stompjs#readme",
   "dependencies": {
     "@stomp/stompjs": "6.1.2",
@@ -27,5 +30,11 @@
     "react": "17.0.2",
     "sockjs-client": "1.6.1",
     "text-encoding": "^0.7.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12"
   }
 }
