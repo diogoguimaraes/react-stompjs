@@ -1,11 +1,10 @@
 import React from 'react'
 import EventEmitter from 'eventemitter3'
-import PropTypes from 'prop-types'
 import SockJS from 'sockjs-client'
+import TextEncodingPolyfill from 'text-encoding';
 import { Client } from '@stomp/stompjs'
 
 if (typeof TextEncoder !== 'function') {
-    const TextEncodingPolyfill = require('text-encoding')
     TextEncoder = TextEncodingPolyfill.TextEncoder
     TextDecoder = TextEncodingPolyfill.TextDecoder
 }
@@ -104,26 +103,8 @@ const stompContext = {
 }
 
 const withStomp = (Component) => (
-    (props) => {
-        const wrapped = <Component stompContext={stompContext} {...props} />
-
-        wrapped.propTypes = {
-            stompContext: PropTypes.shape({
-                getStompClient: PropTypes.func,
-                newStompClient: PropTypes.func,
-                removeStompClient: PropTypes.func,
-                addStompEventListener: PropTypes.func,
-                removeStompEventListener: PropTypes.func,
-            })
-        }
-
-        return wrapped
-    }
+    (props) => <Component stompContext={stompContext} {...props} />
 )
-
-withStomp.propTypes = {
-    Component: PropTypes.element,
-}
 
 // Exports
 export {StompEventTypes, withStomp}

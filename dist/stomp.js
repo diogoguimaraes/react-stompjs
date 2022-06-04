@@ -9,9 +9,9 @@ var _react = _interopRequireDefault(require("react"));
 
 var _eventemitter = _interopRequireDefault(require("eventemitter3"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _sockjsClient = _interopRequireDefault(require("sockjs-client"));
+
+var _textEncoding = _interopRequireDefault(require("text-encoding"));
 
 var _stompjs = require("@stomp/stompjs");
 
@@ -20,10 +20,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 if (typeof TextEncoder !== 'function') {
-  var TextEncodingPolyfill = require('text-encoding');
-
-  TextEncoder = TextEncodingPolyfill.TextEncoder;
-  TextDecoder = TextEncodingPolyfill.TextDecoder;
+  TextEncoder = _textEncoding["default"].TextEncoder;
+  TextDecoder = _textEncoding["default"].TextDecoder;
 } // Stomp client
 
 
@@ -123,24 +121,11 @@ var stompContext = {
 
 var withStomp = function withStomp(Component) {
   return function (props) {
-    var wrapped = /*#__PURE__*/_react["default"].createElement(Component, _extends({
+    return /*#__PURE__*/_react["default"].createElement(Component, _extends({
       stompContext: stompContext
     }, props));
-
-    wrapped.propTypes = {
-      stompContext: _propTypes["default"].shape({
-        getStompClient: _propTypes["default"].func,
-        newStompClient: _propTypes["default"].func,
-        removeStompClient: _propTypes["default"].func,
-        addStompEventListener: _propTypes["default"].func,
-        removeStompEventListener: _propTypes["default"].func
-      })
-    };
-    return wrapped;
   };
-};
+}; // Exports
+
 
 exports.withStomp = withStomp;
-withStomp.propTypes = {
-  Component: _propTypes["default"].element
-}; // Exports
