@@ -27,8 +27,7 @@
     "@stomp/stompjs": "6.1.2",
     "eventemitter3": "4.0.7",
     "react": "17.0.2",
-    "sockjs-client": "1.6.1",
-    "text-encoding": "^0.7.0"
+    "sockjs-client": "1.6.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",

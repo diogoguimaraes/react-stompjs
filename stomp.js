@@ -1,21 +1,13 @@
 import React from 'react'
 import EventEmitter from 'eventemitter3'
 import SockJS from 'sockjs-client'
-import TextEncodingPolyfill from 'text-encoding';
 import { Client } from '@stomp/stompjs'
-
-if (typeof TextEncoder !== 'function') {
-    TextEncoder = TextEncodingPolyfill.TextEncoder
-    TextDecoder = TextEncodingPolyfill.TextDecoder
-}
 
 // Stomp client
 let _stompClient = null
 
 const logger = {
-    log: (str) => {
-        //swallow log
-    }
+    log: (str) => {}
 }
 const stompEvent = new EventEmitter()
 

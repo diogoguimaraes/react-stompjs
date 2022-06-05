@@ -11,24 +11,16 @@ var _eventemitter = _interopRequireDefault(require("eventemitter3"));
 
 var _sockjsClient = _interopRequireDefault(require("sockjs-client"));
 
-var _textEncoding = _interopRequireDefault(require("text-encoding"));
-
 var _stompjs = require("@stomp/stompjs");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-if (typeof TextEncoder !== 'function') {
-  TextEncoder = _textEncoding["default"].TextEncoder;
-  TextDecoder = _textEncoding["default"].TextDecoder;
-} // Stomp client
-
-
+// Stomp client
 var _stompClient = null;
 var logger = {
-  log: function log(str) {//swallow log
-  }
+  log: function log(str) {}
 };
 var stompEvent = new _eventemitter["default"](); // WebSocketError is more reliable on detecting the connection lost
 
